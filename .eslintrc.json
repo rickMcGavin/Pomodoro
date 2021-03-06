@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "react/jsx-filename-extension": [0],
+    "react/display-name": [
+      1,
+      {
+        "ignoreTranspilerName": true
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off"
+  }
+}
