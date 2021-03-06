@@ -14,7 +14,7 @@ export default function Home() {
         <App />
       </main>
 
-      <footer>
+      <footer className="footer">
         By Rick McGavin
       </footer>
     </div>
