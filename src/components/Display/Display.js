@@ -9,10 +9,10 @@ const Display = ({
     setTime(total);
   }, [total]);
   const { minutes = '', seconds = '' } = formatted;
-  if (completed) {
-    // Render a completed state
-    return <div>You&apos;re done</div>;
-  }
+  // if (completed) {
+  //   // Render a completed state
+  //   return <div>You&apos;re done</div>;
+  // }
   // Render a countdown
   return (
     <span className="time">

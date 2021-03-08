@@ -102,4 +102,5 @@ a {
   fill: none;
   stroke: var(--secondary);
   stroke-width: 1;
+  transition: all 750ms linear;
 }

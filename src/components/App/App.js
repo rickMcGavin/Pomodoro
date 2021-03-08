@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CountDown from 'react-countdown';
-import { useSpring, animated } from 'react-spring';
 import Display from '../Display/Display';
 import usePomo from '../../hooks/usePomo';
 import { CIRCLE_PATH } from '../../constants';
@@ -10,21 +9,12 @@ import { CONFIG } from '../../constants';
 // TODO: When paused, reset button does reset animation. Animation only resets when currently running
 
 const App = () => {
-  const initTime = CONFIG[10]
   // Hook to get our data and functions we need for the timer
   const {
-    time, handleReset, timerRef, active, setActive, setTime, resetAnimation
+    time, handleReset, timerRef, active, setActive, setTime, diff
   } = usePomo();
 
-  // react-spring stuff
-  const props = useSpring({
-    config: { duration: initTime },
-    from: { stroke: '0, 100' },
-    stroke: active ? '100, 100' : '0, 100',
-    reset: resetAnimation
-  })
-  const { stroke } = props;
-
+  
   // Custom renderer for the timer display
   const renderer = ({
     total, completed, formatted,
@@ -43,11 +33,12 @@ const App = () => {
           />
           <svg className="svg" viewBox="0 0 36 36" width="250">
             <path className="circle" d={CIRCLE_PATH} />
-            <animated.path
-              className="animate-circle"
-              d={CIRCLE_PATH}
-              strokeDasharray={stroke}
-            />
+              <path
+                className="animate-circle"
+                d={CIRCLE_PATH}
+                strokeDashoffset="0"
+                strokeDasharray={`${100-diff}, 100`}
+              />
           </svg>
         </div>
         <div>

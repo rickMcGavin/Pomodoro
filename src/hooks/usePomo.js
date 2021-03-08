@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { CONFIG } from '../constants';
 
 const usePomo = () => {
-  const initTime = CONFIG[10]
-  const [resetAnimation, setResetAnimation] = useState(false);
+  const initTime = CONFIG[10];
   const [active, setActive] = useState(false);
   const [time, setTime] = useState(initTime);
+  const [diff, setDiff] = useState(((time/60) / (initTime/60)) * 100);
 
   const timerRef = useRef();
   const { stop = () => {}, start = () => {}, pause = () => {}, isStopped = () => false } = timerRef?.current?.api || {};
@@ -13,23 +13,24 @@ const usePomo = () => {
   const handleReset = () => {
     if (active) {
       setActive(!active)
-      return stop();
+      stop();
     };
     setTime(initTime);
+    setDiff(((initTime/60) / (initTime/60)) * 100)
   };
-  
+
   useEffect(() => {
     if (active) {
+      setDiff(((time/60) / (initTime/60)) * 100);
       start();
-      if (resetAnimation) setResetAnimation(!resetAnimation);
     } else {
-      pause();
       if (isStopped()) {
-        setResetAnimation(!resetAnimation);
         setTime(initTime);
+      } else {
+        pause();
       }
     }
-  }, [active]);
+  }, [active, time, diff]);
 
   return {
     time,
@@ -38,7 +39,8 @@ const usePomo = () => {
     active,
     setActive,
     setTime,
-    resetAnimation
+    initTime,
+    diff
   }
 }
 
