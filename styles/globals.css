@@ -101,5 +101,5 @@ a {
 .animate-circle {
   fill: none;
   stroke: var(--secondary);
-  stroke-width: 0.5;
+  stroke-width: 1;
 }
